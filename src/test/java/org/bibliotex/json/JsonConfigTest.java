@@ -13,17 +13,18 @@ public class JsonConfigTest
 {
 
 	@Test
-	public void TestConnection()  throws Exception {
+	public void TestJSonRead()  throws Exception {
 
-		String cs = JsonConfig.asString("properties.name.type");
-		Integer value = JsonConfig.asInt("properties.name.value");
-		String desc = JsonConfig.asString("properties.name.description");
+		JsonConfig jsonConfig = JsonConfig.getInstance("demo.json");
+		String cs = jsonConfig.asString("properties.name.type");
+		Integer value = jsonConfig.asInt("properties.name.value");
+		String desc = jsonConfig.asString("properties.name.description");
 
 		System.out.println(cs);
 		System.out.println(value);
 		System.out.println(desc);
 		
-		System.out.println(JsonConfig.getJsonObject());
+		System.out.println(jsonConfig.getJsonObject());
 		Assert.assertTrue("key not found", cs !=null);
 		//Assert.assertTrue("key not found", value !=null);
 		Assert.assertTrue("key not found", desc !=null);

@@ -13,13 +13,24 @@ import com.google.gson.JsonObject;
 public class JsonConfig {
 	private static Gson gson = new Gson();	
 	
-	private static JsonObject jsonObject = loadConfig();
-	
-	private static JsonObject loadConfig() 
+	private static JsonObject jsonObject;
+
+	private String configFile = "";
+
+	private JsonConfig(String configFile) {
+		this.configFile = configFile;
+		this.jsonObject = loadConfig(configFile);
+	}
+
+	public static JsonConfig getInstance(String configFile) {
+		return new JsonConfig(configFile);
+	}
+
+	private static JsonObject loadConfig(String configFile) 
 	{		
 		JsonObject jObject = null;
 		try {
-			URL sapiEnumResource = Resources.getResource("config.json");
+			URL sapiEnumResource = Resources.getResource(configFile);
 			File file = new File(sapiEnumResource.getFile());						
 			JsonElement jsonElement = gson.fromJson(new FileReader(file), JsonElement.class);			
 			if (jsonElement!=null)
@@ -32,9 +43,10 @@ public class JsonConfig {
 		return jObject;
 	}
 
+	//TODO: use another char to indicate path
 	private static String[] getArrayPath(String path) {
-		if (!path.contains("/"))
-			path = path + "/";
+		if (!path.contains("."))
+			path = path + ".";
 			
 		String[] tmp = path.split("\\.");
 		return tmp;
