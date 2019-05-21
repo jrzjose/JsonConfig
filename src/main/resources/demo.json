@@ -1,0 +1,11 @@
+{
+    "type": "object",
+    "schema": "demo",
+    "properties": {
+        "name" : {
+            "type": "string",
+            "value": 100,
+            "description": "The name of the entry"
+        }
+    }
+}

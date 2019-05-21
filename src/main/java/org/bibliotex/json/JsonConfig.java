@@ -31,10 +31,10 @@ public class JsonConfig {
 
 		return jObject;
 	}
-	
+
 	private static String[] getArrayPath(String path) {
-		if (!path.contains("."))
-			path = path + ".";
+		if (!path.contains("/"))
+			path = path + "/";
 			
 		String[] tmp = path.split("\\.");
 		return tmp;
